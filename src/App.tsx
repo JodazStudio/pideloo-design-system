@@ -11,6 +11,8 @@ import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import UserOnboarding from "./pages/UserOnboarding";
+import Privacy from "./pages/Privacy";
+import Cookies from "./pages/Cookies";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +32,8 @@ const App = () => (
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/onboarding" element={<UserOnboarding />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/cookies" element={<Cookies />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
