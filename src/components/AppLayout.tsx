@@ -11,7 +11,7 @@ export const AppLayout = ({ children, className }: AppLayoutProps) => {
     <div className="min-h-screen bg-background">
       <div
         className={cn(
-          "container mx-auto min-h-screen bg-background relative flex flex-col",
+          "container mx-auto min-h-screen bg-background relative flex flex-col lg:pt-10",
           className
         )}
       >

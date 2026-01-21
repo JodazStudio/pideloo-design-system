@@ -2,8 +2,28 @@ import { BottomNav } from "@/components/BottomNav";
 import { ChevronRight, Moon, Bell, Globe, Shield, Trash2, Instagram, ExternalLink, Cookie } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Settings = () => {
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return document.documentElement.classList.contains("dark") || 
+           (!document.documentElement.classList.contains("light") && 
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+  });
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+    }
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
   return (
     <div className="pb-24">
       {/* Header */}
@@ -24,7 +44,7 @@ const Settings = () => {
               </div>
               <span className="font-medium">Modo Oscuro</span>
             </div>
-            <Switch defaultChecked />
+            <Switch checked={isDarkMode} onCheckedChange={toggleTheme} />
           </div>
         </section>
 
@@ -49,24 +69,6 @@ const Settings = () => {
           </div>
         </section>
 
-        {/* Preferences */}
-        <section className="bg-card rounded-2xl border border-border/50 overflow-hidden">
-          <h3 className="font-bold px-4 pt-4 pb-2 text-sm text-muted-foreground uppercase tracking-wide">
-            Preferencias
-          </h3>
-          <button className="w-full flex items-center justify-between p-4 border-t border-border/50 hover:bg-secondary/50 transition-colors">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
-                <Globe size={20} />
-              </div>
-              <div className="text-left">
-                <span className="font-medium block">Idioma</span>
-                <span className="text-sm text-muted-foreground">Español</span>
-              </div>
-            </div>
-            <ChevronRight size={20} className="text-muted-foreground" />
-          </button>
-        </section>
 
         {/* Account */}
         <section className="bg-card rounded-2xl border border-border/50 overflow-hidden">

@@ -5,6 +5,43 @@ import { CategoryPill } from "@/components/CategoryPill";
 import { BottomNav } from "@/components/BottomNav";
 import { businesses, categories } from "@/data/mockData";
 import pidelooLogo from "@/assets/pideloo-logo.png";
+import { AppLayout } from "@/components/AppLayout";
+
+const RestaurantRow = ({ title, items }: { title: string; items: any[] }) => {
+  if (items.length === 0) return null;
+
+  return (
+    <section className="mb-10 last:mb-0">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-xl font-bold text-foreground">
+          {title}
+        </h3>
+        <button className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors bg-primary/10 px-3 py-1.5 rounded-full lg:bg-transparent lg:px-0">
+          Ver más
+        </button>
+      </div>
+      
+      {/* Mobile: Carousel (5 items max usually) | Desktop: Grid (4 items) */}
+      <div className="relative">
+        {/* Mobile Carousel */}
+        <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 md:hidden">
+          {items.slice(0, 5).map((business) => (
+            <div key={business.id} className="min-w-[280px] max-w-[280px]">
+              <BusinessCard business={business} />
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop Grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {items.slice(0, 4).map((business) => (
+            <BusinessCard key={business.id} business={business} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Marketplace = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -17,98 +54,84 @@ const Marketplace = () => {
     return matchesSearch;
   });
 
-  const featuredBusinesses = filteredBusinesses.filter((b) => b.featured);
-  const regularBusinesses = filteredBusinesses.filter((b) => !b.featured);
+  // Filter groups
+  const groupByCategory = (tag: string) => 
+    filteredBusinesses.filter(b => b.tags.some(t => t.includes(tag)));
+
+  const sections = [
+    { title: "Dulces 🍰", items: groupByCategory("Dulces") },
+    { title: "Desayunos 🍳", items: groupByCategory("Desayunos") },
+    { title: "Comida Rápida 🍔", items: groupByCategory("Comida Rápida") },
+    { title: "Almuerzos 🍱", items: groupByCategory("Almuerzos") },
+    { title: "Todos los Restaurantes", items: filteredBusinesses },
+  ];
 
   return (
     <div className="pb-24">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-background safe-top">
-        <div className="px-4 pt-4 pb-2">
+      <header className="sticky top-0 z-40 bg-background safe-top border-b border-border/10">
+        <div className="px-4 pt-4 pb-4">
           {/* Logo & Welcome */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <img src={pidelooLogo} alt="Pideloo" className="w-10 h-10 rounded-xl" />
+              <img src={pidelooLogo} alt="Pideloo" className="w-12 h-12 rounded-[22px] shadow-lg border border-border/20" />
               <div>
-                <p className="text-sm text-muted-foreground">Buenas noches,</p>
-                <h1 className="font-bold text-foreground">¿Tienes hambre?</h1>
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">¡Hola, hambre!</p>
+                <h1 className="text-lg font-extrabold text-foreground leading-tight">¿Qué pedimos hoy?</h1>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-              <span className="text-lg">👤</span>
+            <div className="w-11 h-11 rounded-2xl bg-secondary hover:bg-secondary/80 transition-colors flex items-center justify-center border border-border/30 cursor-pointer">
+              <span className="text-xl">👤</span>
             </div>
           </div>
 
           {/* Search */}
           <SearchBar onSearch={setSearchQuery} />
         </div>
-
-        {/* Categories */}
-        <div className="px-4 py-3 overflow-x-auto no-scrollbar">
-          <div className="flex gap-2">
-            {categories.map((category) => (
-              <CategoryPill
-                key={category.id}
-                {...category}
-                isActive={activeCategory === category.id}
-                onClick={() => setActiveCategory(category.id)}
-              />
-            ))}
-          </div>
-        </div>
       </header>
 
       {/* Main Content */}
-      <main className="px-4">
-        {/* Hero Banner */}
-        <section className="relative rounded-3xl overflow-hidden mb-6 bg-gradient-to-br from-primary/20 via-card to-accent/10 p-6">
+      <main className="px-4 mt-6">
+        {/* Banner - Optional, let's keep it but make it more premium or hide it if it occupies too much space. The user didn't ask to remove it, but let's make it look better */}
+        <section className="relative rounded-[32px] overflow-hidden mb-10 bg-gradient-to-br from-primary via-primary/90 to-orange-600 p-8 shadow-2xl shadow-primary/20">
           <div className="relative z-10">
-            <h2 className="text-2xl font-bold mb-2">
-              Descubre Sabores Locales.
-              <br />
-              <span className="text-gradient-primary">Apoya a los Creadores Locales.</span>
+            <h2 className="text-3xl lg:text-4xl font-black mb-3 text-white">
+              Explora Sabores<br />
+              <span className="text-accent">Sin Límites.</span>
             </h2>
-            <p className="text-sm text-muted-foreground mb-4">
-              Pide de los mejores restaurantes cerca de ti
+            <p className="text-white/80 font-medium mb-6 max-w-xs">
+              Los mejores restaurantes locales, directamente a tu puerta.
             </p>
-            <button className="bg-primary text-primary-foreground px-6 py-3 rounded-2xl font-bold text-sm glow-primary transition-all hover:scale-105">
-              Explora Ahora
+            <button className="bg-white text-primary px-8 py-3.5 rounded-2xl font-black text-sm shadow-xl hover:scale-105 transition-transform active:scale-95">
+              ¡ORDENAR AHORA!
             </button>
           </div>
-          <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30">
-            <div className="w-full h-full bg-accent rounded-full blur-3xl" />
-          </div>
+          <div className="absolute right-[-10%] top-[-10%] w-64 h-64 bg-accent/20 rounded-full blur-[100px]" />
+          <div className="absolute left-[-5%] bottom-[-5%] w-48 h-48 bg-white/10 rounded-full blur-[80px]" />
         </section>
 
-        {/* Featured Section */}
-        {featuredBusinesses.length > 0 && (
-          <section className="mb-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold">
-                🔥 <span className="text-gradient-primary">Destacados</span>
-              </h3>
-              <button className="text-sm text-primary font-medium">Ver todos</button>
-            </div>
-            <div className="grid gap-4">
-              {featuredBusinesses.map((business) => (
-                <BusinessCard key={business.id} business={business} />
+        {/* Categories Carousel (kept for better UX, but optional) */}
+        {!searchQuery && (
+          <div className="mb-10 overflow-x-auto no-scrollbar -mx-4 px-4">
+            <div className="flex gap-3">
+              {categories.map((category) => (
+                <CategoryPill
+                  key={category.id}
+                  {...category}
+                  isActive={activeCategory === category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                />
               ))}
             </div>
-          </section>
+          </div>
         )}
 
-        {/* All Restaurants */}
-        <section className="mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-bold">Todos los Restaurantes</h3>
-            <button className="text-sm text-primary font-medium">Filtrar</button>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {regularBusinesses.map((business) => (
-              <BusinessCard key={business.id} business={business} />
-            ))}
-          </div>
-        </section>
+        {/* Categorized Rows */}
+        <div className="space-y-4">
+          {sections.map((section, idx) => (
+            <RestaurantRow key={idx} title={section.title} items={section.items} />
+          ))}
+        </div>
       </main>
 
       {/* Bottom Navigation */}

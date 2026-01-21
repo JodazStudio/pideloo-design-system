@@ -54,26 +54,26 @@
     --sidebar-ring: 16 100% 50%;
   }
 
-  /* Light mode - same dark theme for Pideloo */
+  /* Light mode - White theme for Pideloo */
   .light {
-    --background: 0 0% 10%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 12%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 16 100% 50%;
+    --background: 0 0% 94.1%; /* #F0F0F0 */
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 16 100% 50%; /* Keep Electric Persimmon */
     --primary-foreground: 0 0% 100%;
-    --accent: 72 100% 62%;
+    --accent: 72 100% 62%; /* Keep Acid Lime */
     --accent-foreground: 0 0% 10%;
-    --secondary: 0 0% 18%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 65%;
+    --secondary: 0 0% 88%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 85%;
+    --muted-foreground: 0 0% 45%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 22%;
-    --input: 0 0% 18%;
+    --border: 0 0% 85%;
+    --input: 0 0% 100%;
     --ring: 16 100% 50%;
   }
 }
