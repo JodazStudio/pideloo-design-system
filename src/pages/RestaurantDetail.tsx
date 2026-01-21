@@ -118,7 +118,7 @@ const RestaurantDetail = () => {
               <MapPin size={14} className="text-accent" />
               <span>{business.distance}</span>
             </div>
-            <span className="text-accent font-medium">{business.deliveryFee} delivery</span>
+            <span className="text-accent font-medium">{business.deliveryFee} envío</span>
           </div>
         </div>
       </div>
@@ -137,7 +137,7 @@ const RestaurantDetail = () => {
                   : "bg-secondary text-secondary-foreground"
               )}
             >
-              {category.charAt(0).toUpperCase() + category.slice(1)}
+              {category === "all" ? "Todos" : category.charAt(0).toUpperCase() + category.slice(1)}
             </button>
           ))}
         </div>

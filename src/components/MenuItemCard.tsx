@@ -81,7 +81,7 @@ export const MenuItemCard = ({
                 onClick={onAdd}
               >
                 <Plus size={14} />
-                Add
+                Agregar
               </Button>
             )}
           </div>

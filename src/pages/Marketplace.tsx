@@ -30,8 +30,8 @@ const Marketplace = () => {
             <div className="flex items-center gap-3">
               <img src={pidelooLogo} alt="Pideloo" className="w-10 h-10 rounded-xl" />
               <div>
-                <p className="text-sm text-muted-foreground">Good evening,</p>
-                <h1 className="font-bold text-foreground">Hungry?</h1>
+                <p className="text-sm text-muted-foreground">Buenas noches,</p>
+                <h1 className="font-bold text-foreground">¿Tienes hambre?</h1>
               </div>
             </div>
             <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
@@ -64,15 +64,15 @@ const Marketplace = () => {
         <section className="relative rounded-3xl overflow-hidden mb-6 bg-gradient-to-br from-primary/20 via-card to-accent/10 p-6">
           <div className="relative z-10">
             <h2 className="text-2xl font-bold mb-2">
-              Discover Local Flavors.
+              Descubre Sabores Locales.
               <br />
-              <span className="text-gradient-primary">Support Local Creators.</span>
+              <span className="text-gradient-primary">Apoya a los Creadores Locales.</span>
             </h2>
             <p className="text-sm text-muted-foreground mb-4">
-              Order from the best restaurants near you
+              Pide de los mejores restaurantes cerca de ti
             </p>
             <button className="bg-primary text-primary-foreground px-6 py-3 rounded-2xl font-bold text-sm glow-primary transition-all hover:scale-105">
-              Explore Now
+              Explora Ahora
             </button>
           </div>
           <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30">
@@ -85,9 +85,9 @@ const Marketplace = () => {
           <section className="mb-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold">
-                🔥 <span className="text-gradient-primary">Featured</span>
+                🔥 <span className="text-gradient-primary">Destacados</span>
               </h3>
-              <button className="text-sm text-primary font-medium">See all</button>
+              <button className="text-sm text-primary font-medium">Ver todos</button>
             </div>
             <div className="grid gap-4">
               {featuredBusinesses.map((business) => (
@@ -100,8 +100,8 @@ const Marketplace = () => {
         {/* All Restaurants */}
         <section className="mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-bold">All Restaurants</h3>
-            <button className="text-sm text-primary font-medium">Filter</button>
+            <h3 className="text-lg font-bold">Todos los Restaurantes</h3>
+            <button className="text-sm text-primary font-medium">Filtrar</button>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {regularBusinesses.map((business) => (

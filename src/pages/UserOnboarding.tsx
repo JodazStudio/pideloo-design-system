@@ -8,14 +8,14 @@ import pidelooLogo from "@/assets/pideloo-logo.png";
 import { cn } from "@/lib/utils";
 
 const cuisinePreferences = [
-  { id: "mexican", name: "Mexican", icon: "🌮" },
-  { id: "asian", name: "Asian", icon: "🍜" },
-  { id: "italian", name: "Italian", icon: "🍕" },
-  { id: "american", name: "American", icon: "🍔" },
-  { id: "indian", name: "Indian", icon: "🍛" },
-  { id: "healthy", name: "Healthy", icon: "🥗" },
-  { id: "desserts", name: "Desserts", icon: "🍰" },
-  { id: "coffee", name: "Coffee", icon: "☕" },
+  { id: "mexican", name: "Mexicana", icon: "🌮" },
+  { id: "asian", name: "Asiática", icon: "🍜" },
+  { id: "italian", name: "Italiana", icon: "🍕" },
+  { id: "american", name: "Americana", icon: "🍔" },
+  { id: "indian", name: "India", icon: "🍛" },
+  { id: "healthy", name: "Saludable", icon: "🥗" },
+  { id: "desserts", name: "Postres", icon: "🍰" },
+  { id: "coffee", name: "Café", icon: "☕" },
 ];
 
 const UserOnboarding = () => {
@@ -49,10 +49,10 @@ const UserOnboarding = () => {
               className="w-32 h-32 mx-auto mb-8 rounded-3xl animate-float"
             />
             <h1 className="text-3xl font-bold mb-4">
-              Welcome to <span className="text-gradient-primary">Pideloo</span>
+              Bienvenido a <span className="text-gradient-primary">Pideloo</span>
             </h1>
             <p className="text-muted-foreground text-lg">
-              Discover local flavors from your favorite creators
+              Descubre sabores locales de tus creadores favoritos
             </p>
           </div>
         );
@@ -64,19 +64,19 @@ const UserOnboarding = () => {
               <MapPin size={40} className="text-accent" />
             </div>
             <h1 className="text-2xl font-bold text-center mb-4">
-              Set Your Location
+              Tu Ubicación
             </h1>
             <p className="text-muted-foreground text-center mb-8">
-              We'll find the best eats near you
+              Encontraremos los mejores lugares cerca de ti
             </p>
             <button className="w-full flex items-center gap-4 p-4 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all">
               <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center">
                 <MapPin size={24} className="text-accent" />
               </div>
               <div className="flex-1 text-left">
-                <p className="font-medium">Enable Location</p>
+                <p className="font-medium">Activar Ubicación</p>
                 <p className="text-sm text-muted-foreground">
-                  Allow Pideloo to access your location
+                  Permite que Pideloo acceda a tu ubicación
                 </p>
               </div>
               <ChevronRight size={20} className="text-muted-foreground" />
@@ -88,10 +88,10 @@ const UserOnboarding = () => {
         return (
           <div className="animate-fade-in">
             <h1 className="text-2xl font-bold text-center mb-4">
-              What do you love to eat?
+              ¿Qué te encanta comer?
             </h1>
             <p className="text-muted-foreground text-center mb-8">
-              Select your favorite cuisines
+              Selecciona tus cocinas favoritas
             </p>
             <div className="grid grid-cols-2 gap-3">
               {cuisinePreferences.map((cuisine) => (
@@ -117,9 +117,9 @@ const UserOnboarding = () => {
         return (
           <div className="text-center animate-fade-in">
             <div className="text-8xl mb-8 animate-float">🎉</div>
-            <h1 className="text-3xl font-bold mb-4">You're All Set!</h1>
+            <h1 className="text-3xl font-bold mb-4">¡Todo Listo!</h1>
             <p className="text-muted-foreground text-lg">
-              Start exploring and order your first meal
+              Empieza a explorar y pide tu primera comida
             </p>
           </div>
         );
@@ -147,19 +147,20 @@ const UserOnboarding = () => {
           onClick={nextStep}
           className="w-full py-6 rounded-2xl text-lg font-bold glow-primary"
         >
-          {currentStep === steps.length - 1 ? "Let's Go!" : "Continue"}
+          {currentStep === steps.length - 1 ? "¡Vamos!" : "Continuar"}
         </Button>
         {currentStep > 0 && currentStep < steps.length - 1 && (
           <button
             onClick={nextStep}
             className="w-full py-4 text-muted-foreground text-sm"
           >
-            Skip for now
+            Omitir por ahora
           </button>
         )}
       </div>
     </div>
-  );
+);
+
 };
 
 export default UserOnboarding;

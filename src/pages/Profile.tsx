@@ -3,12 +3,12 @@ import { ChevronRight, User, MapPin, CreditCard, Heart, Bell, HelpCircle, LogOut
 import { Link } from "react-router-dom";
 
 const menuItems = [
-  { icon: User, label: "Account Settings", path: "/settings" },
-  { icon: MapPin, label: "Saved Addresses", path: "/settings" },
-  { icon: CreditCard, label: "Payment Methods", path: "/settings" },
-  { icon: Heart, label: "Favorites", path: "/settings" },
-  { icon: Bell, label: "Notifications", path: "/settings" },
-  { icon: HelpCircle, label: "Help & Support", path: "/settings" },
+  { icon: User, label: "Ajustes de Cuenta", path: "/settings" },
+  { icon: MapPin, label: "Direcciones Guardadas", path: "/settings" },
+  { icon: CreditCard, label: "Métodos de Pago", path: "/settings" },
+  { icon: Heart, label: "Favoritos", path: "/settings" },
+  { icon: Bell, label: "Notificaciones", path: "/settings" },
+  { icon: HelpCircle, label: "Ayuda y Soporte", path: "/settings" },
 ];
 
 const Profile = () => {
@@ -32,15 +32,15 @@ const Profile = () => {
         <div className="grid grid-cols-3 gap-4">
           <div className="bg-card rounded-2xl p-4 text-center border border-border/50">
             <p className="text-2xl font-bold text-primary">12</p>
-            <p className="text-xs text-muted-foreground">Orders</p>
+            <p className="text-xs text-muted-foreground">Pedidos</p>
           </div>
           <div className="bg-card rounded-2xl p-4 text-center border border-border/50">
             <p className="text-2xl font-bold text-accent">5</p>
-            <p className="text-xs text-muted-foreground">Favorites</p>
+            <p className="text-xs text-muted-foreground">Favoritos</p>
           </div>
           <div className="bg-card rounded-2xl p-4 text-center border border-border/50">
             <p className="text-2xl font-bold">$342</p>
-            <p className="text-xs text-muted-foreground">Total Spent</p>
+            <p className="text-xs text-muted-foreground">Gasto Total</p>
           </div>
         </div>
       </div>
@@ -66,9 +66,10 @@ const Profile = () => {
         {/* Logout */}
         <button className="w-full mt-6 flex items-center justify-center gap-2 p-4 rounded-2xl border border-destructive/50 text-destructive hover:bg-destructive/10 transition-colors">
           <LogOut size={20} />
-          <span className="font-medium">Log Out</span>
+          <span className="font-medium">Cerrar Sesión</span>
         </button>
       </main>
+
 
       <BottomNav />
     </div>

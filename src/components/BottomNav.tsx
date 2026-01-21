@@ -3,10 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { icon: Home, label: "Home", path: "/" },
-  { icon: ShoppingBag, label: "Orders", path: "/orders" },
-  { icon: User, label: "Profile", path: "/profile" },
-  { icon: Settings, label: "Settings", path: "/settings" },
+  { icon: Home, label: "Inicio", path: "/" },
+  { icon: ShoppingBag, label: "Pedidos", path: "/orders" },
+  { icon: User, label: "Perfil", path: "/profile" },
+  { icon: Settings, label: "Ajustes", path: "/settings" },
 ];
 
 export const BottomNav = () => {

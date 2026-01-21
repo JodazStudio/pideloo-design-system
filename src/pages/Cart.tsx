@@ -57,7 +57,7 @@ const Cart = () => {
           >
             <ArrowLeft size={20} />
           </Link>
-          <h1 className="text-xl font-bold">Your Cart</h1>
+          <h1 className="text-xl font-bold">Tu Carrito</h1>
         </div>
       </header>
 
@@ -66,13 +66,13 @@ const Cart = () => {
         {cartItems.length === 0 ? (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">🛒</div>
-            <h2 className="text-xl font-bold mb-2">Your cart is empty</h2>
+            <h2 className="text-xl font-bold mb-2">Tu carrito está vacío</h2>
             <p className="text-muted-foreground mb-6">
-              Add some delicious items to get started
+              Añade algunos platos deliciosos para comenzar
             </p>
             <Link to="/">
               <Button className="rounded-2xl glow-primary">
-                Browse Restaurants
+                Ver Restaurantes
               </Button>
             </Link>
           </div>
@@ -136,7 +136,7 @@ const Cart = () => {
                   <Input
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value)}
-                    placeholder="Enter promo code"
+                    placeholder="Introduce código promo"
                     className="pl-10 rounded-xl bg-secondary border-none"
                     disabled={promoApplied}
                   />
@@ -147,31 +147,31 @@ const Cart = () => {
                   className="rounded-xl"
                   disabled={promoApplied}
                 >
-                  {promoApplied ? "Applied!" : "Apply"}
+                  {promoApplied ? "¡Aplicado!" : "Aplicar"}
                 </Button>
               </div>
               {promoApplied && (
                 <p className="text-accent text-sm mt-2 font-medium">
-                  🎉 10% discount applied!
+                  🎉 ¡10% de descuento aplicado!
                 </p>
               )}
             </div>
 
             {/* Order Summary */}
             <div className="bg-card rounded-2xl p-5 border border-border/50">
-              <h3 className="font-bold mb-4">Order Summary</h3>
+              <h3 className="font-bold mb-4">Resumen del Pedido</h3>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Delivery Fee</span>
+                  <span className="text-muted-foreground">Costo de Envío</span>
                   <span>${deliveryFee.toFixed(2)}</span>
                 </div>
                 {promoApplied && (
                   <div className="flex justify-between text-accent">
-                    <span>Discount (10%)</span>
+                    <span>Descuento (10%)</span>
                     <span>-${discount.toFixed(2)}</span>
                   </div>
                 )}
@@ -190,11 +190,12 @@ const Cart = () => {
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur-lg border-t border-border safe-bottom">
           <Link to="/checkout">
             <Button className="w-full py-6 rounded-2xl text-lg font-bold glow-primary animate-pulse-glow">
-              Checkout · ${total.toFixed(2)}
+              Finalizar Pedido · ${total.toFixed(2)}
             </Button>
           </Link>
         </div>
       )}
+
     </div>
   );
 };

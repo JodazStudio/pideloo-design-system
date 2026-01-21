@@ -31,7 +31,7 @@ export const FloatingCart = ({ itemCount, total, className }: FloatingCartProps)
             {itemCount}
           </span>
         </div>
-        <span className="font-medium">View Cart</span>
+        <span className="font-medium">Ver Carrito</span>
       </div>
       
       <span className="font-bold text-lg">${total.toFixed(2)}</span>

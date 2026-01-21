@@ -27,7 +27,7 @@ export const SearchBar = ({ onSearch, className }: SearchBarProps) => {
     >
       <div className="flex items-center gap-2 text-accent">
         <MapPin size={18} className="drop-shadow-[0_0_6px_hsl(72,100%,62%)]" />
-        <span className="text-sm font-medium">Downtown</span>
+        <span className="text-sm font-medium">Centro</span>
       </div>
       
       <div className="w-px h-5 bg-border" />
@@ -40,7 +40,7 @@ export const SearchBar = ({ onSearch, className }: SearchBarProps) => {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder="Search restaurants, cuisines..."
+          placeholder="Busca restaurantes, cocinas..."
           className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
         />
       </div>

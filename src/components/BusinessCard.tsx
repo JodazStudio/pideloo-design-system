@@ -28,7 +28,7 @@ export const BusinessCard = ({ business, className }: BusinessCardProps) => {
         {/* Featured badge */}
         {business.featured && (
           <div className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full glow-primary-subtle">
-            Featured
+            Destacado
           </div>
         )}
         
