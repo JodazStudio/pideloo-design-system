@@ -13,6 +13,7 @@ import Settings from "./pages/Settings";
 import UserOnboarding from "./pages/UserOnboarding";
 import Privacy from "./pages/Privacy";
 import Cookies from "./pages/Cookies";
+import CategoryDetail from "./pages/CategoryDetail";
 import NotFound from "./pages/NotFound";
 
 import { AppLayout } from "./components/AppLayout";
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/onboarding" element={<UserOnboarding />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/cookies" element={<Cookies />} />
+            <Route path="/categories/:categoryName" element={<CategoryDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppLayout>

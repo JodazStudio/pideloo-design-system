@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { SearchBar } from "@/components/SearchBar";
 import { BusinessCard } from "@/components/BusinessCard";
 import { CategoryPill } from "@/components/CategoryPill";
@@ -7,7 +8,8 @@ import { businesses, categories } from "@/data/mockData";
 import pidelooLogo from "@/assets/pideloo-logo.png";
 import { AppLayout } from "@/components/AppLayout";
 
-const RestaurantRow = ({ title, items }: { title: string; items: any[] }) => {
+const RestaurantRow = ({ title, items, category }: { title: string; items: any[]; category?: string }) => {
+  const navigate = useNavigate();
   if (items.length === 0) return null;
 
   return (
@@ -16,14 +18,18 @@ const RestaurantRow = ({ title, items }: { title: string; items: any[] }) => {
         <h3 className="text-xl font-bold text-foreground">
           {title}
         </h3>
-        <button className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors bg-primary/10 px-3 py-1.5 rounded-full lg:bg-transparent lg:px-0">
-          Ver más
-        </button>
+        {category && (
+          <button 
+            onClick={() => navigate(`/categories/${encodeURIComponent(category)}`)}
+            className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors bg-primary/10 px-3 py-1.5 rounded-full lg:bg-transparent lg:px-0"
+          >
+            Ver más
+          </button>
+        )}
       </div>
       
       {/* Mobile: Carousel (5 items max usually) | Desktop: Grid (4 items) */}
       <div className="relative">
-        {/* Mobile Carousel */}
         <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 md:hidden">
           {items.slice(0, 5).map((business) => (
             <div key={business.id} className="min-w-[280px] max-w-[280px]">
@@ -32,7 +38,6 @@ const RestaurantRow = ({ title, items }: { title: string; items: any[] }) => {
           ))}
         </div>
 
-        {/* Desktop Grid */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {items.slice(0, 4).map((business) => (
             <BusinessCard key={business.id} business={business} />
@@ -46,6 +51,7 @@ const RestaurantRow = ({ title, items }: { title: string; items: any[] }) => {
 const Marketplace = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const filteredBusinesses = businesses.filter((business) => {
     const matchesSearch =
@@ -54,24 +60,30 @@ const Marketplace = () => {
     return matchesSearch;
   });
 
-  // Filter groups
   const groupByCategory = (tag: string) => 
     filteredBusinesses.filter(b => b.tags.some(t => t.includes(tag)));
 
   const sections = [
-    { title: "Dulces 🍰", items: groupByCategory("Dulces") },
-    { title: "Desayunos 🍳", items: groupByCategory("Desayunos") },
-    { title: "Comida Rápida 🍔", items: groupByCategory("Comida Rápida") },
-    { title: "Almuerzos 🍱", items: groupByCategory("Almuerzos") },
+    { title: "Dulces 🍰", items: groupByCategory("Dulces"), category: "Dulces" },
+    { title: "Desayunos 🍳", items: groupByCategory("Desayunos"), category: "Desayunos" },
+    { title: "Comida Rápida 🍔", items: groupByCategory("Comida Rápida"), category: "Comida Rápida" },
+    { title: "Almuerzos 🍱", items: groupByCategory("Almuerzos"), category: "Almuerzos" },
     { title: "Todos los Restaurantes", items: filteredBusinesses },
   ];
+
+  const handleCategoryClick = (category: any) => {
+    if (category.id === "all") {
+      setActiveCategory("all");
+    } else {
+      navigate(`/categories/${encodeURIComponent(category.name)}`);
+    }
+  };
 
   return (
     <div className="pb-24">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-background safe-top border-b border-border/10">
+      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-lg safe-top border-b border-border/10">
         <div className="px-4 pt-4 pb-4">
-          {/* Logo & Welcome */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <img src={pidelooLogo} alt="Pideloo" className="w-12 h-12 rounded-[22px] shadow-lg border border-border/20" />
@@ -85,14 +97,11 @@ const Marketplace = () => {
             </div>
           </div>
 
-          {/* Search */}
           <SearchBar onSearch={setSearchQuery} />
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="px-4 mt-6">
-        {/* Banner - Optional, let's keep it but make it more premium or hide it if it occupies too much space. The user didn't ask to remove it, but let's make it look better */}
         <section className="relative rounded-[32px] overflow-hidden mb-10 bg-gradient-to-br from-primary via-primary/90 to-orange-600 p-8 shadow-2xl shadow-primary/20">
           <div className="relative z-10">
             <h2 className="text-3xl lg:text-4xl font-black mb-3 text-white">
@@ -110,7 +119,6 @@ const Marketplace = () => {
           <div className="absolute left-[-5%] bottom-[-5%] w-48 h-48 bg-white/10 rounded-full blur-[80px]" />
         </section>
 
-        {/* Categories Carousel (kept for better UX, but optional) */}
         {!searchQuery && (
           <div className="mb-10 overflow-x-auto no-scrollbar -mx-4 px-4">
             <div className="flex gap-3">
@@ -119,22 +127,20 @@ const Marketplace = () => {
                   key={category.id}
                   {...category}
                   isActive={activeCategory === category.id}
-                  onClick={() => setActiveCategory(category.id)}
+                  onClick={() => handleCategoryClick(category)}
                 />
               ))}
             </div>
           </div>
         )}
 
-        {/* Categorized Rows */}
         <div className="space-y-4">
           {sections.map((section, idx) => (
-            <RestaurantRow key={idx} title={section.title} items={section.items} />
+            <RestaurantRow key={idx} title={section.title} items={section.items} category={section.category} />
           ))}
         </div>
       </main>
 
-      {/* Bottom Navigation */}
       <BottomNav />
     </div>
   );
