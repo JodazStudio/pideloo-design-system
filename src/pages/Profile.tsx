@@ -13,7 +13,7 @@ const menuItems = [
 
 const Profile = () => {
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="pb-24">
       {/* Header */}
       <header className="px-4 pt-8 pb-6 safe-top">
         <div className="flex items-center gap-4">

@@ -21,9 +21,9 @@ const Marketplace = () => {
   const regularBusinesses = filteredBusinesses.filter((b) => !b.featured);
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="pb-24">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg safe-top">
+      <header className="sticky top-0 z-40 bg-background safe-top">
         <div className="px-4 pt-4 pb-2">
           {/* Logo & Welcome */}
           <div className="flex items-center justify-between mb-4">

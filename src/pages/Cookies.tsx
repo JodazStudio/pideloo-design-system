@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Cookies = () => {
   return (
-    <div className="min-h-screen bg-background pb-12">
+    <div className="pb-12">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg px-4 py-4 safe-top flex items-center gap-4">
         <Link

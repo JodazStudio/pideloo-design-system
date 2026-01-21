@@ -130,7 +130,7 @@ const UserOnboarding = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="flex flex-col">
       {/* Progress Bar */}
       <div className="px-6 pt-8 safe-top">
         <ProgressBar currentStep={currentStep + 1} totalSteps={steps.length} />

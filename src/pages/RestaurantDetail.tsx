@@ -59,7 +59,7 @@ const RestaurantDetail = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background pb-32">
+    <div className="pb-32">
       {/* Hero Image */}
       <div className="relative h-64 overflow-hidden">
         <img

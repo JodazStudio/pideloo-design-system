@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Settings = () => {
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="pb-24">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg px-4 py-4 safe-top">
         <h1 className="text-2xl font-bold">Ajustes</h1>

@@ -12,18 +12,19 @@ export const FloatingCart = ({ itemCount, total, className }: FloatingCartProps)
   if (itemCount === 0) return null;
 
   return (
-    <Link
-      to="/cart"
-      className={cn(
-        "fixed bottom-24 left-4 right-4 max-w-lg mx-auto z-40",
-        "flex items-center justify-between",
-        "bg-primary text-primary-foreground",
-        "px-5 py-4 rounded-2xl",
-        "glow-primary animate-fade-in",
-        "transition-all duration-300 hover:scale-[1.02]",
-        className
-      )}
-    >
+    <div className="fixed bottom-24 left-0 right-0 z-40 flex justify-center pointer-events-none">
+      <div className="container max-w-screen-xl pointer-events-auto px-4">
+        <Link
+          to="/cart"
+          className={cn(
+            "flex items-center justify-between",
+            "bg-primary text-primary-foreground",
+            "px-5 py-4 rounded-2xl",
+            "glow-primary animate-fade-in",
+            "transition-all duration-300 hover:scale-[1.02]",
+            className
+          )}
+        >
       <div className="flex items-center gap-3">
         <div className="relative">
           <ShoppingCart size={22} />
@@ -35,6 +36,8 @@ export const FloatingCart = ({ itemCount, total, className }: FloatingCartProps)
       </div>
       
       <span className="font-bold text-lg">${total.toFixed(2)}</span>
-    </Link>
+        </Link>
+      </div>
+    </div>
   );
 };

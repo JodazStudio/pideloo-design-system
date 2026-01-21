@@ -47,7 +47,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-32">
+    <div className="pb-32">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg px-4 py-4 safe-top">
         <div className="flex items-center gap-4">
@@ -187,12 +187,14 @@ const Cart = () => {
 
       {/* Checkout Button */}
       {cartItems.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur-lg border-t border-border safe-bottom">
-          <Link to="/checkout">
+        <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center">
+          <div className="container max-w-screen-xl p-4 bg-background/95 backdrop-blur-lg border-t border-border safe-bottom">
+            <Link to="/checkout">
             <Button className="w-full py-6 rounded-2xl text-lg font-bold glow-primary animate-pulse-glow">
               Finalizar Pedido · ${total.toFixed(2)}
             </Button>
-          </Link>
+            </Link>
+          </div>
         </div>
       )}
 

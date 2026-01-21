@@ -25,7 +25,7 @@ const Checkout = () => {
 
   if (isComplete) {
     return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4">
+      <div className="flex flex-col items-center justify-center px-4">
         <div className="animate-scale-in text-center">
           <div className="w-24 h-24 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-6">
             <Check size={48} className="text-accent" />
@@ -68,7 +68,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-32">
+    <div className="pb-32">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg px-4 py-4 safe-top">
         <div className="flex items-center gap-4">
@@ -180,8 +180,9 @@ const Checkout = () => {
       </main>
 
       {/* Order Button */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur-lg border-t border-border safe-bottom">
-        <Button
+      <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center">
+        <div className="container max-w-screen-xl p-4 bg-background/95 backdrop-blur-lg border-t border-border safe-bottom">
+          <Button
           onClick={handleOrder}
           disabled={isProcessing}
           className="w-full py-6 rounded-2xl text-lg font-bold glow-primary animate-pulse-glow disabled:animate-none"
@@ -194,7 +195,8 @@ const Checkout = () => {
           ) : (
             "Pedir Ahora · $39.86"
           )}
-        </Button>
+          </Button>
+        </div>
       </div>
     </div>
   );

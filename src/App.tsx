@@ -15,6 +15,8 @@ import Privacy from "./pages/Privacy";
 import Cookies from "./pages/Cookies";
 import NotFound from "./pages/NotFound";
 
+import { AppLayout } from "./components/AppLayout";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -23,19 +25,21 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Marketplace />} />
-          <Route path="/restaurant/:id" element={<RestaurantDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/onboarding" element={<UserOnboarding />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/cookies" element={<Cookies />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AppLayout>
+          <Routes>
+            <Route path="/" element={<Marketplace />} />
+            <Route path="/restaurant/:id" element={<RestaurantDetail />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/onboarding" element={<UserOnboarding />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/cookies" element={<Cookies />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AppLayout>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
