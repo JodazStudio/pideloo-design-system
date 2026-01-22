@@ -1,16 +1,26 @@
-import { Home, ShoppingBag, User, Settings } from "lucide-react";
+
+import { Home, ShoppingBag, User, Settings, LogIn } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-
-const navItems = [
-  { icon: Home, label: "Inicio", path: "/" },
-  { icon: ShoppingBag, label: "Pedidos", path: "/orders" },
-  { icon: User, label: "Perfil", path: "/profile" },
-  { icon: Settings, label: "Ajustes", path: "/settings" },
-];
+import { useAuthStore } from "@/store/useAuthStore";
 
 export const BottomNav = () => {
   const location = useLocation();
+  const { isAuthenticated } = useAuthStore();
+
+  const navItems = [
+    { icon: Home, label: "Inicio", path: "/" },
+    { icon: ShoppingBag, label: "Pedidos", path: "/orders" },
+    ...(isAuthenticated 
+      ? [
+          { icon: User, label: "Perfil", path: "/profile" },
+          { icon: Settings, label: "Ajustes", path: "/settings" }
+        ]
+      : [
+          { icon: LogIn, label: "Ingresar", path: "/login" }
+        ]
+    )
+  ];
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-lg border-t border-border safe-bottom">

@@ -1,6 +1,7 @@
 import { BottomNav } from "@/components/BottomNav";
 import { ChevronRight, User, MapPin, CreditCard, Heart, Bell, HelpCircle, LogOut } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const menuItems = [
   { icon: User, label: "Ajustes de Cuenta", path: "/settings" },
@@ -12,17 +13,30 @@ const menuItems = [
 ];
 
 const Profile = () => {
+  const { user, logout } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
+  if (!user) {
+    navigate("/login");
+    return null;
+  }
+
   return (
     <div className="pb-24">
       {/* Header */}
       <header className="px-4 pt-8 pb-6 safe-top">
         <div className="flex items-center gap-4">
           <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-3xl">
-            👤
+            {user.avatar || "👤"}
           </div>
           <div>
-            <h1 className="text-2xl font-bold">John Doe</h1>
-            <p className="text-muted-foreground">john.doe@email.com</p>
+            <h1 className="text-2xl font-bold">{user.name}</h1>
+            <p className="text-muted-foreground">{user.email}</p>
           </div>
         </div>
       </header>
@@ -64,12 +78,14 @@ const Profile = () => {
         </div>
 
         {/* Logout */}
-        <button className="w-full mt-6 flex items-center justify-center gap-2 p-4 rounded-2xl border border-destructive/50 text-destructive hover:bg-destructive/10 transition-colors">
+        <button 
+          onClick={handleLogout}
+          className="w-full mt-6 flex items-center justify-center gap-2 p-4 rounded-2xl border border-destructive/50 text-destructive hover:bg-destructive/10 transition-colors"
+        >
           <LogOut size={20} />
           <span className="font-medium">Cerrar Sesión</span>
         </button>
       </main>
-
 
       <BottomNav />
     </div>

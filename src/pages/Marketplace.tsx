@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { SearchBar } from "@/components/SearchBar";
+import { useNavigate } from "react-router-dom";
 import { BusinessCard } from "@/components/BusinessCard";
 import { CategoryPill } from "@/components/CategoryPill";
 import { BottomNav } from "@/components/BottomNav";
 import { businesses, categories } from "@/data/mockData";
-import pidelooLogo from "@/assets/pideloo-logo.png";
+import { Header } from "@/components/Header";
 import { AppLayout } from "@/components/AppLayout";
+import { useSearchStore } from "@/store/useSearchStore";
 
 const RestaurantRow = ({ title, items, category }: { title: string; items: any[]; category?: string }) => {
   const navigate = useNavigate();
@@ -49,8 +49,8 @@ const RestaurantRow = ({ title, items, category }: { title: string; items: any[]
 };
 
 const Marketplace = () => {
+  const { searchQuery, setSearchQuery } = useSearchStore();
   const [activeCategory, setActiveCategory] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   const filteredBusinesses = businesses.filter((business) => {
@@ -81,25 +81,12 @@ const Marketplace = () => {
 
   return (
     <div className="pb-24">
-      {/* Header */}
-      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-lg safe-top border-b border-border/10">
-        <div className="px-4 pt-4 pb-4">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <img src={pidelooLogo} alt="Pideloo" className="w-12 h-12 rounded-[22px] shadow-lg border border-border/20" />
-              <div>
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">¡Hola, hambre!</p>
-                <h1 className="text-lg font-extrabold text-foreground leading-tight">¿Qué pedimos hoy?</h1>
-              </div>
-            </div>
-            <div className="w-11 h-11 rounded-2xl bg-secondary hover:bg-secondary/80 transition-colors flex items-center justify-center border border-border/30 cursor-pointer">
-              <span className="text-xl">👤</span>
-            </div>
-          </div>
-
-          <SearchBar onSearch={setSearchQuery} />
-        </div>
-      </header>
+      <Header 
+        title="¿Qué pedimos hoy?" 
+        subtitle="¡Hola, hambre!" 
+        showSearch={true}
+        onSearch={setSearchQuery} 
+      />
 
       <main className="px-4 mt-6">
         <section className="relative rounded-[32px] overflow-hidden mb-10 bg-gradient-to-br from-primary via-primary/90 to-orange-600 p-8 shadow-2xl shadow-primary/20">

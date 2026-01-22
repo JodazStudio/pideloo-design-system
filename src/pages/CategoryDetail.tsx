@@ -1,8 +1,8 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ArrowLeft, ChevronRight } from "lucide-react";
 import { businesses } from "@/data/mockData";
 import { BusinessCard } from "@/components/BusinessCard";
 import { BottomNav } from "@/components/BottomNav";
+import { Header } from "@/components/Header";
 
 const CategoryDetail = () => {
   const { categoryName } = useParams<{ categoryName: string }>();
@@ -21,27 +21,7 @@ const CategoryDetail = () => {
 
   return (
     <div className="pb-24 animate-in fade-in duration-500">
-      {/* Header with Breadcrumb Pattern */}
-      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-lg safe-top border-b border-border/10">
-        <div className="px-4 py-4 flex items-center gap-3">
-          <button 
-            onClick={() => navigate(-1)}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-secondary hover:bg-secondary/80 transition-colors"
-          >
-            <ArrowLeft className="text-foreground" size={20} />
-          </button>
-          
-          <nav className="flex items-center gap-2 text-sm font-medium">
-            <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
-              Home
-            </Link>
-            <ChevronRight size={14} className="text-muted-foreground/30" />
-            <span className="text-primary font-bold">
-              {currentCategory}
-            </span>
-          </nav>
-        </div>
-      </header>
+      <Header showBack title={currentCategory} />
 
       <main className="px-4 mt-6">
         <div className="mb-8">
