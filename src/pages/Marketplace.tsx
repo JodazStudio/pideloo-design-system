@@ -2,11 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BusinessCard } from "@/components/BusinessCard";
 import { CategoryPill } from "@/components/CategoryPill";
-import { BottomNav } from "@/components/BottomNav";
 import { businesses, categories } from "@/data/mockData";
 import { Header } from "@/components/Header";
-import { AppLayout } from "@/components/AppLayout";
 import { useSearchStore } from "@/store/useSearchStore";
+import { LocationModal } from "@/components/LocationModal";
 
 const RestaurantRow = ({ title, items, category }: { title: string; items: any[]; category?: string }) => {
   const navigate = useNavigate();
@@ -80,7 +79,8 @@ const Marketplace = () => {
   };
 
   return (
-    <div className="pb-24">
+    <div>
+      <LocationModal />
       <Header 
         title="¿Qué pedimos hoy?" 
         subtitle="¡Hola, hambre!" 
@@ -127,8 +127,6 @@ const Marketplace = () => {
           ))}
         </div>
       </main>
-
-      <BottomNav />
     </div>
   );
 };

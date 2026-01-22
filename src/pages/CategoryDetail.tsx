@@ -1,7 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { businesses } from "@/data/mockData";
 import { BusinessCard } from "@/components/BusinessCard";
-import { BottomNav } from "@/components/BottomNav";
 import { Header } from "@/components/Header";
 
 const CategoryDetail = () => {
@@ -20,7 +19,7 @@ const CategoryDetail = () => {
   );
 
   return (
-    <div className="pb-24 animate-in fade-in duration-500">
+    <div className="animate-in fade-in duration-500">
       <Header showBack title={currentCategory} />
 
       <main className="px-4 mt-6">
@@ -57,8 +56,6 @@ const CategoryDetail = () => {
           </div>
         )}
       </main>
-
-      <BottomNav />
     </div>
   );
 };

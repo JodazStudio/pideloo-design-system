@@ -137,7 +137,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="pb-32">
+    <div>
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg px-4 py-4 safe-top">
         <div className="flex items-center gap-4">
@@ -511,25 +511,25 @@ const Checkout = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Order Button */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center">
-        <div className="container max-w-screen-xl p-4 bg-background/95 backdrop-blur-lg border-t border-border safe-bottom">
+      {/* Order Button - Shifted up for BottomNav */}
+      <div className="fixed bottom-[80px] left-0 right-0 z-40 flex justify-center px-4 pointer-events-none mb-safe">
+        <div className="w-full max-w-lg pointer-events-auto">
           <Button
-          onClick={handleOrderAction}
-          disabled={isProcessing}
-          className="w-full py-7 rounded-[24px] text-lg font-bold glow-primary disabled:animate-none group h-14"
-        >
-          {isProcessing ? (
-            <span className="flex items-center gap-2">
-              <Loader2 className="animate-spin" />
-              Procesando...
-            </span>
-          ) : (
-            <span className="flex items-center justify-between w-full px-2">
-              <span>{orderType === "delivery" ? "Pedir Ahora" : "Confirmar Retiro"}</span>
-              <span>${total.toFixed(2)}</span>
-            </span>
-          )}
+            onClick={handleOrderAction}
+            disabled={isProcessing}
+            className="w-full py-7 rounded-[24px] text-lg font-bold glow-primary disabled:animate-none group h-14 shadow-2xl"
+          >
+            {isProcessing ? (
+              <span className="flex items-center gap-2">
+                <Loader2 className="animate-spin" />
+                Procesando...
+              </span>
+            ) : (
+              <span className="flex items-center justify-between w-full px-2">
+                <span>{orderType === "delivery" ? "Pedir Ahora" : "Confirmar Retiro"}</span>
+                <span>${total.toFixed(2)}</span>
+              </span>
+            )}
           </Button>
         </div>
       </div>

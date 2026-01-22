@@ -1,4 +1,3 @@
-import { BottomNav } from "@/components/BottomNav";
 import { ChevronRight, User, MapPin, CreditCard, Heart, Bell, HelpCircle, LogOut } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -27,7 +26,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="pb-24">
+    <div>
       {/* Header */}
       <header className="px-4 pt-8 pb-6 safe-top">
         <div className="flex items-center gap-4">
@@ -86,8 +85,6 @@ const Profile = () => {
           <span className="font-medium">Cerrar Sesión</span>
         </button>
       </main>
-
-      <BottomNav />
     </div>
   );
 };

@@ -47,7 +47,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="pb-32">
+    <div>
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg px-4 py-4 safe-top">
         <div className="flex items-center gap-4">
@@ -185,19 +185,16 @@ const Cart = () => {
         )}
       </main>
 
-      {/* Checkout Button */}
+      {/* Checkout Button - Shifted up for BottomNav */}
       {cartItems.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center">
-          <div className="container max-w-screen-xl p-4 bg-background/95 backdrop-blur-lg border-t border-border safe-bottom">
-            <Link to="/checkout">
-            <Button className="w-full py-6 rounded-2xl text-lg font-bold glow-primary animate-pulse-glow">
+        <div className="fixed bottom-[80px] left-0 right-0 z-40 flex justify-center px-4 pointer-events-none mb-safe">
+          <Link to="/checkout" className="w-full max-w-lg pointer-events-auto">
+            <Button className="w-full py-6 rounded-2xl text-lg font-bold glow-primary animate-pulse-glow shadow-2xl">
               Finalizar Pedido · ${total.toFixed(2)}
             </Button>
-            </Link>
-          </div>
+          </Link>
         </div>
       )}
-
     </div>
   );
 };

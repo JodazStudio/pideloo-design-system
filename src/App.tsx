@@ -18,18 +18,46 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
 import { AppLayout } from "./components/AppLayout";
+import { BottomNav } from "./components/BottomNav";
 
 const MainLayout = () => (
-  <AppLayout>
+  <AppLayout className="pb-24">
     <Outlet />
+    <BottomNav />
   </AppLayout>
 );
+
+import { useEffect } from "react";
+import { useLocationStore } from "./store/useLocationStore";
+
+const LocationSync = () => {
+  const { setLocation } = useLocationStore();
+
+  useEffect(() => {
+    // Attempt to get location if permission was already granted
+    if ("geolocation" in navigator) {
+      navigator.permissions.query({ name: "geolocation" }).then((result) => {
+        if (result.state === "granted") {
+          navigator.geolocation.getCurrentPosition((position) => {
+            setLocation({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            });
+          });
+        }
+      });
+    }
+  }, [setLocation]);
+
+  return null;
+};
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <LocationSync />
       <Toaster />
       <Sonner />
       <BrowserRouter>

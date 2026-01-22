@@ -1,6 +1,9 @@
 import { BottomNav } from "@/components/BottomNav";
-import { Clock, Package, CheckCircle } from "lucide-react";
+import { Clock, Package, CheckCircle, ShoppingBag, LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/store/useAuthStore";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const orders = [
   {
@@ -45,6 +48,47 @@ const statusConfig = {
 };
 
 const Orders = () => {
+  const { isAuthenticated } = useAuthStore();
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-[100dvh] flex flex-col bg-background">
+        <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg px-4 py-4 safe-top">
+          <h1 className="text-2xl font-bold">Tus Pedidos</h1>
+        </header>
+
+        <main className="flex-1 flex flex-col items-center justify-center px-6 text-center">
+          <div className="relative mb-8">
+            <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-150" />
+            <div className="relative w-24 h-24 bg-card rounded-3xl flex items-center justify-center border border-border/50 shadow-2xl rotate-3">
+              <ShoppingBag className="w-12 h-12 text-primary -rotate-3" />
+            </div>
+            <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-accent rounded-2xl flex items-center justify-center border-4 border-background shadow-lg -rotate-6">
+              <LogIn className="w-5 h-5 text-accent-foreground" />
+            </div>
+          </div>
+
+          <h2 className="text-2xl font-bold mb-3">¡Hambre de seguimiento!</h2>
+          <p className="text-muted-foreground mb-10 max-w-[280px]">
+            Inicia sesión para rastrear tus pedidos en tiempo real y ver tu historial de banquetes.
+          </p>
+
+          <Link to="/login" className="w-full max-w-[280px]">
+            <Button className="w-full h-14 rounded-2xl text-lg font-bold glow-primary shadow-xl shadow-primary/20">
+              Iniciar Sesión
+            </Button>
+          </Link>
+          
+          <Link to="/" className="mt-6 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            Volver al inicio
+          </Link>
+        </main>
+
+        <BottomNav />
+      </div>
+    );
+  }
+
   return (
     <div className="pb-24">
       {/* Header */}

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MapPin, ChevronRight } from "lucide-react";
+import { MapPin, ChevronRight, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/ProgressBar";
 import { onboardingSteps } from "@/data/mockData";
+import { useLocationStore } from "@/store/useLocationStore";
 import pidelooLogo from "@/assets/pideloo-logo.png";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +23,7 @@ const UserOnboarding = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
+  const { setLocation, isLocationSet } = useLocationStore();
   const steps = onboardingSteps.user;
 
   const nextStep = () => {
@@ -29,6 +31,26 @@ const UserOnboarding = () => {
       setCurrentStep(currentStep + 1);
     } else {
       navigate("/");
+    }
+  };
+
+  const handleRequestLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+          nextStep();
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          nextStep();
+        }
+      );
+    } else {
+      nextStep();
     }
   };
 
@@ -69,14 +91,20 @@ const UserOnboarding = () => {
             <p className="text-muted-foreground text-center mb-8">
               Encontraremos los mejores lugares cerca de ti
             </p>
-            <button className="w-full flex items-center gap-4 p-4 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all">
+            <button 
+              onClick={handleRequestLocation}
+              className={cn(
+                "w-full flex items-center gap-4 p-4 rounded-2xl border transition-all",
+                isLocationSet ? "border-primary bg-primary/5" : "border-border bg-card hover:border-primary/50"
+              )}
+            >
               <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center">
-                <MapPin size={24} className="text-accent" />
+                <Navigation size={24} className="text-accent" />
               </div>
               <div className="flex-1 text-left">
-                <p className="font-medium">Activar Ubicación</p>
+                <p className="font-medium">{isLocationSet ? "Ubicación Configurada" : "Activar Ubicación"}</p>
                 <p className="text-sm text-muted-foreground">
-                  Permite que Pideloo acceda a tu ubicación
+                  {isLocationSet ? "Ya tenemos tu ubicación lista" : "Permite que Pideloo acceda a tu ubicación"}
                 </p>
               </div>
               <ChevronRight size={20} className="text-muted-foreground" />
