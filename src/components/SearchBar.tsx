@@ -32,8 +32,8 @@ export const SearchBar = ({ onSearch, className }: SearchBarProps) => {
       
       <div className="w-px h-5 bg-border" />
       
-      <div className="flex-1 flex items-center gap-2">
-        <Search size={18} className="text-muted-foreground" />
+      <div className="flex-1 flex items-center gap-2 min-w-0">
+        <Search size={18} className="text-muted-foreground shrink-0" />
         <input
           type="text"
           value={query}
@@ -41,7 +41,7 @@ export const SearchBar = ({ onSearch, className }: SearchBarProps) => {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder="Busca restaurantes, cocinas..."
-          className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
+          className="flex-1 w-full bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground min-w-0 truncate"
         />
       </div>
     </form>
